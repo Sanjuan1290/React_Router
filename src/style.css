@@ -32,9 +32,12 @@ a{
     text-decoration: none;
     color: black;
 }
+
+
 li {
     list-style: none;
 }
+
 
 header{
     display: flex;
@@ -174,32 +177,69 @@ footer > p{
     gap: 30px;
     margin: 30px 0px;
 }
-.vansPage > .vans-container > .van{
+.vansPage > .vans-container > a > .van{
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-.vansPage > .vans-container > .van > img{
+.vansPage > .vans-container > a > .van > img{
     width: 100%;
     border-radius: 5px;
     border: 1px solid rgba(128, 128, 128, 0.254);
 }
-.vansPage > .vans-container > .van > .name_and_rent{
+.vansPage > .vans-container > a > .van > .name_and_rent{
     display: flex;
     justify-content: space-between;
     
 }
-.vansPage > .vans-container > .van > .name_and_rent > h3:nth-of-type(2) p{
+.vansPage > .vans-container > a > .van > .name_and_rent > h3:nth-of-type(2) p{
     font-size: 12px;
     margin-top: -3px;
     text-align: right;
 }
-.vansPage > .vans-container > .van > button{
+.vansPage > .vans-container > a > .van > button{
     width: 100px;
     height: 35px;
     border: none;
     border-radius: 5px;
     color: white;
+}
+
+
+.vanDetails{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+}
+.vanDetails > a::before{
+    content: '←';
+    margin-right: 8px;
+}
+.vanDetails > a > span{
+    text-decoration: underline; 
+}
+.vanDetails > img{
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+}
+.vanDetails > .vanType{
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: none;
+    pointer-events: none;
+}
+.vanDetails > .rentBtn{
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(212,109,43);
+    cursor: pointer;
 }
 
 .simple{

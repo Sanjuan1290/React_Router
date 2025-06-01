@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Vans from './components/Vans'
+import VanDetail from './components/VanDetail'
 import Home from './pages/Home'
 import About from './pages/About'
 import './server'
@@ -28,6 +29,7 @@ export default function App(){
                 <Route path='/' element={<Home />}/>
                 <Route path='/about' element={<About />} />
                 <Route path='/vans' element={vans.length !== 0 && <Vans vans={vans} />} />
+                <Route path='/vans/:id' element={<VanDetail vans={vans} />}/>
             </Routes>
 
             <Footer />

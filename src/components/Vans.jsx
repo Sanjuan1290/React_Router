@@ -1,8 +1,8 @@
+import { Link } from 'react-router-dom'
 
 export default function Vans({vans}){
 
     return(
-        
         <section className="vansPage">
             <h1>Explore our van options</h1>
 
@@ -16,28 +16,28 @@ export default function Vans({vans}){
                 </div>
 
                 <button className="clearFiltered">Clear Filters</button>
-            </section>
-
+            </section> 
 
             <section className="vans-container">
                 { 
                     vans.length !== 0 &&  vans.map((van) => {
-                        return <div key={van.id} className="van">
-                                    <img src={van.imageUrl} alt={`${van.name} image`} />
+                        return <Link to={`/vans/${van.id}`} key={van.id}>
+                                    <div className="van">
+                                        <img src={van.imageUrl} alt={`${van.name} image`} />
 
-                                    <div className="name_and_rent">
-                                        <h3>{van.name}</h3>
-                                        <h3>${van.price} <p>/day</p></h3>
+                                        <div className="name_and_rent">
+                                            <h3>{van.name}</h3>
+                                            <h3>${van.price} <p>/day</p></h3>
+                                        </div>
+
+                                        <button className={
+                                            van.type === "simple" ? 'simple' :
+                                            van.type === "rugged" ? 'rugged' :
+                                            van.type === "luxury" ? 'luxury' : null
+                                        }
+                                        >{van.type}</button>
                                     </div>
-
-                                    <button className={
-                                        van.type === "simple" ? 'simple' :
-                                        van.type === "rugged" ? 'rugged' :
-                                        van.type === "luxury" ? 'luxury' : null
-                                     
-                                    }
-                                    >{van.type}</button>
-                                </div>
+                                </Link>
                     })
                 }
             </section>
