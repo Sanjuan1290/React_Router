@@ -13,7 +13,6 @@ export default function App(){
     const [vans, setVans] = useState([])
 
     useEffect(()=> {
-        console.log(vans);
         fetch('/api/vans').
         then(response => response.json()).
         then(data => setVans(data.vans))

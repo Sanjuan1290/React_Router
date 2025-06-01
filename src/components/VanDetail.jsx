@@ -1,15 +1,22 @@
+import { useEffect, useState } from 'react'
 import { useParams, Link } from "react-router-dom"
+import '../server'
 
 export default function VanDetail(props){
 
+    const [van, setVan] = useState(null)
+
     const params = useParams()
 
-    console.log(params.id);
+    useEffect(()=>{
+        fetch(`/api/vans/${params.id}`)
+            .then(res => res.json())
+            .then(data => setVan(data.vans))
+    }, [params.id])
 
     return(
 
-        props.vans.map(van => (
-            van.id === params.id ? 
+        van !== null &&                 
                 <section key={van.id} className="vanDetails">
                     <Link to='/vans'><span>Back to all vans</span></Link>
 
@@ -29,9 +36,7 @@ export default function VanDetail(props){
                     <small>{van.description}</small>
 
                     <button className="rentBtn">Rent this van</button>
-                </section> : null
-        ))
-        
-        
+                </section>
+                 
     )
 }
