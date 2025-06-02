@@ -251,3 +251,14 @@ footer > p{
 .rugged{
     background-color: rgba(0, 128, 0, 0.655);
 }
+
+.hostLayout-container > ul {
+    display: flex;
+    gap: 10px;
+}
+
+
+.activeNav{
+    font-weight: bold;
+    text-decoration: underline;
+}
