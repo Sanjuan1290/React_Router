@@ -22,14 +22,17 @@ export default function App(){
 
         <BrowserRouter>
 
-            <Header />
+            
 
             <Routes>
-                <Route path='/' element={<Home />}/>
-                <Route path='/about' element={<About />} />
-                <Route path='/vans' element={vans.length !== 0 && <Vans vans={vans} />} />
-                <Route path='/vans/:id' element={<VanDetail vans={vans} />}/>
+                <Route element={ <Header /> }>
+                    <Route path='/' element={<Home />}/>
+                    <Route path='/about' element={<About />} />
+                    <Route path='/vans' element={vans.length !== 0 && <Vans vans={vans} />} />
+                    <Route path='/vans/:id' element={<VanDetail vans={vans} />}/>
+                </Route>
             </Routes>
+
 
             <Footer />
 
