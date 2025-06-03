@@ -1,19 +1,24 @@
-import { Link, useLocation } from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 
 
 export default function Header(props){
 
-    const urlLocation = useLocation()
     return(
         <>
             <header>
-                <Link to="/"><h1>#VANLIFE</h1></Link>
+                <NavLink to="/"><h1>#VANLIFE</h1></NavLink>
 
                 <nav>
                     <ul>
-                        <li>{<Link to="/host" className={urlLocation.pathname.startsWith('/host') ? 'activeNav' : null}>Host</Link>}</li>
-                        <li>{<Link to="/about" className={urlLocation.pathname.startsWith('/about') ? 'activeNav' : null}>About</Link>}</li>
-                        <li>{<Link to="/vans" className={urlLocation.pathname.startsWith('/vans') ? 'activeNav' : null}>Vans</Link>}</li>
+                        <li><NavLink
+                            to="/host" 
+                            className={obj => obj.isActive ? 'activeNav' : null}>Host</NavLink></li>
+                        <li><NavLink
+                            to="/about" 
+                            className={obj => obj.isActive ? 'activeNav' : null}>About</NavLink></li>
+                        <li><NavLink
+                            to="/vans" 
+                            className={obj => obj.isActive ? 'activeNav' : null}>Vans</NavLink></li>
                     </ul>
                 </nav>
 
