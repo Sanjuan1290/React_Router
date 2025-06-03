@@ -12,11 +12,6 @@ body{
 }
 
 
-::-webkit-scrollbar{
-    display: none;
-}
-
-
 #root{
     display: flex;
     flex-direction: column;
@@ -25,6 +20,28 @@ body{
     
     overflow-y: auto;
     height: 100%;
+}
+
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+
+.simple{
+    background-color: rgb(255, 135, 8);
+}
+.luxury{
+    background-color: black;
+}
+.rugged{
+    background-color: rgba(0, 128, 0, 0.655);
+}
+
+
+.activeNav{
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 
@@ -242,15 +259,6 @@ footer > p{
     cursor: pointer;
 }
 
-.simple{
-    background-color: rgb(255, 135, 8);
-}
-.luxury{
-    background-color: black;
-}
-.rugged{
-    background-color: rgba(0, 128, 0, 0.655);
-}
 
 .hostLayout-container > ul {
     display: flex;
@@ -258,7 +266,46 @@ footer > p{
 }
 
 
-.activeNav{
-    font-weight: bold;
+.vansList{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 40px 20px;
+}
+.vansList > .listedVans-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.vansList > .listedVans-container > a > div{
+    display: flex;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(254,254,254);
+    gap: 10px;
+    cursor: pointer;
+}
+.vansList > .listedVans-container > a > div > img{
+    width: 50px;
+    border-radius: 5px;
+}
+.vansList > .listedVans-container > a > div > div > h2{
+    font-size: 1.25rem;
+    margin-bottom: 3px;
+}
+.vansList > .listedVans-container > a > div > div > p{
+    font-size: .9rem;
+    font-weight: 500;
+    opacity: .7;
+}
+
+
+.vansListDetails > a::before{
+    content: '←';
+    margin-right: 8px;
+}
+.vansListDetails > a > span {
     text-decoration: underline;
+    font-weight: 600;
+    font-size: .9rem;
 }

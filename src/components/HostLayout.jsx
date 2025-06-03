@@ -18,6 +18,11 @@ export default function Layout() {
           >Income</NavLink></li>
 
           <li><NavLink 
+            to="/host/vans"
+            className={obj => obj.isActive ? 'activeNav' : ''}
+          >Vans</NavLink></li>
+
+          <li><NavLink 
             to="/host/reviews"
             className={obj => obj.isActive ? 'activeNav' : ''}
           >Reviews</NavLink></li>

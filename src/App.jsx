@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 
 import Layout from './components/Layout'
 import HostLayout from './components/HostLayout'
+// import VansListLayout from './components/VansListLayout'
 
 import Vans from './pages/Vans/Vans'
 import VanDetail from './pages/Vans/VanDetail'
@@ -14,6 +15,11 @@ import Dashboard from "./pages/Host/Dashboard"
 import Income from './pages/Host/Income'
 import Reviews from './pages/Host/Reviews'
 
+import VansList from './pages/Host/VansComponents/VansList'
+import VansListDetails from './pages/Host/VansComponents/VansListDetails'
+import Details from './pages/Host/VansComponents/VansListDetailsComponents/Details'
+import Photos from './pages/Host/VansComponents/VansListDetailsComponents/Photos'
+import Pricing from './pages/Host/VansComponents/VansListDetailsComponents/Pricing'
 
 import './server'
 
@@ -33,6 +39,7 @@ export default function App(){
             <Routes>
 
                 <Route path='/' element={ <Layout /> }>
+
                     <Route index element={<Home />}/>
                     <Route path='about' element={<About />} />
                     <Route path='vans' element={vans.length !== 0 && <Vans vans={vans} />} />
@@ -41,6 +48,10 @@ export default function App(){
                     <Route path="host" element={<HostLayout />} >
                         <Route index element={<Dashboard />}/>
                         <Route path='income' element={<Income />} />
+
+                        <Route path='vans' element={<VansList vans={vans}/>} />
+                        <Route path='vans/:id' element={<VansListDetails />} />
+
                         <Route path='reviews' element={<Reviews />} />
                     </Route>
 
