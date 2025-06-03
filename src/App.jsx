@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 
 import Layout from './components/Layout'
 import HostLayout from './components/HostLayout'
-// import VansListLayout from './components/VansListLayout'
+import VansListLayout from './components/VansListLayout'
 
 import Vans from './pages/Vans/Vans'
 import VanDetail from './pages/Vans/VanDetail'
@@ -16,7 +16,7 @@ import Income from './pages/Host/Income'
 import Reviews from './pages/Host/Reviews'
 
 import VansList from './pages/Host/VansComponents/VansList'
-import VansListDetails from './pages/Host/VansComponents/VansListDetails'
+
 import Details from './pages/Host/VansComponents/VansListDetailsComponents/Details'
 import Photos from './pages/Host/VansComponents/VansListDetailsComponents/Photos'
 import Pricing from './pages/Host/VansComponents/VansListDetailsComponents/Pricing'
@@ -50,7 +50,11 @@ export default function App(){
                         <Route path='income' element={<Income />} />
 
                         <Route path='vans' element={<VansList vans={vans}/>} />
-                        <Route path='vans/:id' element={<VansListDetails />} />
+                        <Route path='vans/:id' element={<VansListLayout />}> 
+                            <Route path='details' element={<Details />} />
+                            <Route path='photos' element={<Photos />} />
+                            <Route path='pricing' element={<Pricing />} />
+                        </Route>
 
                         <Route path='reviews' element={<Reviews />} />
                     </Route>

@@ -300,12 +300,70 @@ footer > p{
 }
 
 
-.vansListDetails > a::before{
+.vansListDetails_Layout{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 20px;
+}
+.vansListDetails_Layout > a::before{
     content: '←';
     margin-right: 8px;
 }
-.vansListDetails > a > span {
+.vansListDetails_Layout > a > span {
     text-decoration: underline;
     font-weight: 600;
+    font-size: .9rem;
+}
+.vansListDetails_Layout > div {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.vansListDetails_Layout > div > .vanListDetails{
+    display: flex;
+    gap: 15px;
+}
+.vansListDetails_Layout > div > .vanListDetails > img{
+    width: 150px;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.303);
+}
+.vansListDetails_Layout > div > .vanListDetails > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+.vansListDetails_Layout > div > .vanListDetails > div > button{
+    width: 60px;
+    height: 32px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+.vansListDetails_Layout > div > .vanListDetails > div > h2{
+    font-weight: 800;
+}
+.vansListDetails_Layout > div > .vanListDetails > div > p{
+    font-weight: bold;
+}
+.vansListDetails_Layout > div > .vanListDetails > div > p > span{
+    font-size: .9rem;
+    opacity: .6;
+}
+.vansListDetails_Layout > div > nav {
+    margin: 20px 0px;
+    font-weight: 600;
+    opacity: .7;
+}
+.vansListDetails_Layout > div > nav > ul{
+    display: flex;
+    gap: 20px;
+}
+.vansListDetails_Layout > div > .details-container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     font-size: .9rem;
 }
