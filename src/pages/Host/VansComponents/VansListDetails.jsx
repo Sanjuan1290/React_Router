@@ -34,9 +34,21 @@ export default function VansListDetails(){
            {
                 van !== null && <nav>
                     <ul>
-                        <NavLink className={obj => obj.isActive ? 'activeNav' : ''} to="details"><li>Details</li></NavLink>
-                        <NavLink className={obj => obj.isActive ? 'activeNav' : ''} to="pricing"><li>Pricing</li></NavLink>
-                        <NavLink className={obj => obj.isActive ? 'activeNav' : ''} to="photos"><li>Photos</li></NavLink>
+                        <NavLink 
+                            className={obj => obj.isActive ? 'activeNav' : ''} 
+                            end
+                            to=""><li>Details</li>
+                        </NavLink>
+
+                        <NavLink 
+                            className={obj => obj.isActive ? 'activeNav' : ''} 
+                            to="pricing"><li>Pricing</li>
+                        </NavLink>
+
+                        <NavLink 
+                            className={obj => obj.isActive ? 'activeNav' : ''} 
+                            to="photos"><li>Photos</li>
+                        </NavLink>
                     </ul>
                 </nav>
            }

@@ -51,7 +51,7 @@ export default function App(){
 
                         <Route path='vans' element={<VansList vans={vans}/>} />
                         <Route path='vans/:id' element={<VansListLayout />}> 
-                            <Route path='details' element={<Details />} />
+                            <Route index element={<Details />} />
                             <Route path='photos' element={<Photos />} />
                             <Route path='pricing' element={<Pricing />} />
                         </Route>

@@ -5,7 +5,7 @@ export default function VansListLayout(){
 
     return(
         <section className="vansListDetails_Layout">
-            <NavLink><span>Back to all vans</span></NavLink>
+            <NavLink to='..' relative="path"><span>Back to all vans</span></NavLink>
 
             <div>
                 <VansListDetails />
