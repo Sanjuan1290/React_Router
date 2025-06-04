@@ -1,17 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams, NavLink } from "react-router-dom"
 
-export default function VansListDetails(){
-
-    const params = useParams()
-
-    const [van, setVan] = useState(null)
-
-    useEffect(()=> {
-        fetch(`/api/vans/${params.id}`)
-            .then(res => res.json())
-            .then(data => setVan(data.vans))
-    }, [])
+export default function VansListDetails({van}){
 
     return(
         <>
@@ -23,7 +13,7 @@ export default function VansListDetails(){
                         <button className={
                                             van.type === "simple" ? 'simple' :
                                             van.type === "rugged" ? 'rugged' :
-                                            van.type === "luxury" ? 'luxury' : null
+                                            van.type === "luxury" ? 'luxury' : ""
                                         }>{van.type}</button>
                         <h2>{van.name}</h2>
                         <p>{`$${van.price}`}<span>/day</span></p>

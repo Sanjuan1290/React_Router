@@ -17,6 +17,7 @@ export default function VansList({vans}){
                 </NavLink>
     ))
 
+
     return(
         <section className="vansList">
             <h1>Your listed vans</h1>

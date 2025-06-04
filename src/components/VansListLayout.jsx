@@ -1,16 +1,29 @@
-import { Outlet, NavLink } from "react-router-dom"
+import { Outlet, NavLink, useParams } from "react-router-dom"
 import VansListDetails from "../pages/Host/VansComponents/VansListDetails"
+import { useEffect, useState } from "react"
 
 export default function VansListLayout(){
+    const { id } = useParams()
+    const [van, setVan] = useState(null)
+
+    useEffect(() => {
+        fetch(`/api/vans/${id}`)
+            .then(res => res.json())
+            .then(data => setVan(data.vans))
+    }, [])
 
     return(
-        <section className="vansListDetails_Layout">
-            <NavLink to='..' relative="path"><span>Back to all vans</span></NavLink>
+        <>
+        {
+            van && van !== null && <section className="vansListDetails_Layout">
+                <NavLink to='..' relative="path"><span>Back to all vans</span></NavLink>
 
-            <div>
-                <VansListDetails />
-                <Outlet />
-            </div>
-        </ section>
+                <div>
+                    <VansListDetails van={van} />
+                    <Outlet context={{van}}/>
+                </div>
+            </ section>
+        }
+        </>
     )
 }
