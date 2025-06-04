@@ -50,7 +50,7 @@ export default function App(){
                         <Route path='income' element={<Income />} />
 
                         <Route path='vans' element={<VansList vans={vans}/>} />
-                        
+
                         <Route path='vans/:id' element={<VansListLayout />}> 
                             <Route index element={<Details />} />
                             <Route path='photos' element={<Photos />} />

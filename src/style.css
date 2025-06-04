@@ -45,6 +45,13 @@ body{
 }
 
 
+.activeFilterType{
+    font-weight: bold;
+    text-decoration: underline;
+    background-color: rgb(225, 192, 153);
+}
+
+
 a{
     text-decoration: none;
     color: black;
@@ -176,11 +183,13 @@ footer > p{
     display: flex;
     gap: 20px;
 }
-.vansPage > .filter-section > .filtered-container > ul > li{
+.vansPage > .filter-section > .filtered-container > ul > li > button{
     background-color: rgb(250, 212, 169);
     padding: 5px 10px;
     font-size: 14px;
     border-radius: 3px;
+    border: none;
+    cursor: pointer;
 }
 .vansPage > .filter-section > .clearFiltered{
     background-color: transparent;
