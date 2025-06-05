@@ -22,25 +22,27 @@ export default function Vans({vans}){
         setSearchParams(params)
 
     }, [filterTypes, searchParams])
+    console.log(searchParams.toString());
 
     const vanOptions =  vans.map((van) => {
-                    return (filterTypes.includes(van.type) || filterTypes.length === 0) && <Link to={`/vans/${van.id}`} key={van.id}>
-                                    <div className="van">
-                                        <img src={van.imageUrl} alt={`${van.name} image`} />
+                    return (filterTypes.includes(van.type) || filterTypes.length === 0) && 
+                                    <Link to={`/vans/${van.id}`} key={van.id} state={{search: searchParams.toString()}} >
+                                            <div className="van">
+                                                <img src={van.imageUrl} alt={`${van.name} image`} />
 
-                                        <div className="name_and_rent">
-                                            <h3>{van.name}</h3>
-                                            <h3>${van.price} <p>/day</p></h3>
-                                        </div>
+                                                <div className="name_and_rent">
+                                                    <h3>{van.name}</h3>
+                                                    <h3>${van.price} <p>/day</p></h3>
+                                                </div>
 
-                                        <button className={
-                                                van.type === "simple" ? 'simple' :
-                                                van.type === "rugged" ? 'rugged' :
-                                                van.type === "luxury" ? 'luxury' : null
-                                            }
-                                        >{van.type}</button>
-                                    </div>
-                            </Link>
+                                                <button className={
+                                                        van.type === "simple" ? 'simple' :
+                                                        van.type === "rugged" ? 'rugged' :
+                                                        van.type === "luxury" ? 'luxury' : null
+                                                    }
+                                                >{van.type}</button>
+                                            </div>
+                                    </Link>
                     })
 
     function handleFilterClick(newKey) {

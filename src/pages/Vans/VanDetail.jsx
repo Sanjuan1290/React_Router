@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useLocation } from "react-router-dom"
 import '../../server'
 
 export default function VanDetail(props){
@@ -14,11 +14,13 @@ export default function VanDetail(props){
             .then(data => setVan(data.vans))
     }, [params.id])
 
+    const location = useLocation()
+
     return(
 
         van !== null &&                 
                 <section key={van.id} className="vanDetails">
-                    <Link to='/vans'><span>Back to all vans</span></Link>
+                    <Link to={`/vans?${location.state?.search}`}><span>Back to all vans</span></Link>
 
                     <img src={van.imageUrl} alt="Van Image" />
 
