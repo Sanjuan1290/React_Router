@@ -62,15 +62,15 @@ export default function Vans({vans}){
                     <ul>
                         <li><button 
                             onClick={()=>{handleFilterClick('simple')}}
-                            className={filterTypes.includes('simple') ? 'activeFilterType' : ''}>
+                            className={searchParams.getAll('filter').includes('simple') ? 'activeFilterType' : ''}>
                                 Simple</button></li>
                         <li><button 
                             onClick={()=>{handleFilterClick('luxury')}}
-                            className={filterTypes.includes('luxury') ? 'activeFilterType' : ''}>
+                            className={searchParams.getAll('filter').includes('luxury') ? 'activeFilterType' : ''}>
                                 Luxury</button></li>
                         <li><button 
                             onClick={()=>{handleFilterClick('rugged')}}
-                            className={filterTypes.includes('rugged') ? 'activeFilterType' : ''}>
+                            className={searchParams.getAll('filter').includes('rugged') ? 'activeFilterType' : ''}>
                                 Rugged</button></li>
                     </ul>
                 </div>
