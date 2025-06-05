@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import Layout from './components/Layout'
 import HostLayout from './components/HostLayout'
 import VansListLayout from './components/VansListLayout'
+import NotFound from "./components/NotFound"
 
 import Vans from './pages/Vans/Vans'
 import VanDetail from './pages/Vans/VanDetail'
@@ -60,7 +61,9 @@ export default function App(){
                         <Route path='reviews' element={<Reviews />} />
                     </Route>
 
+                    <Route path="*" element={<NotFound />}/>
                 </Route>
+                
 
             </Routes>
 

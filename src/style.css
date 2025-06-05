@@ -377,3 +377,24 @@ footer > p{
     gap: 15px;
     font-size: .9rem;
 }
+
+.notFound {
+    padding: 20px;
+}
+.notFound h1{
+    width: 400px;
+}
+.notFound a > button{
+    width: 100%;
+    max-width: 450px;
+    padding: 15px 0px;
+    background-color: black;
+    color: rgb(237, 237, 237);
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+.notFound a > button:hover{
+    opacity: .9;
+}

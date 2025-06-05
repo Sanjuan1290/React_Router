@@ -1,20 +1,28 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link, useLocation } from "react-router-dom"
 import '../../server'
+import NotFound from '../../components/NotFound'
 
-export default function VanDetail(props){
+export default function VanDetail(){
 
-    const [van, setVan] = useState(null)
+    const [van, setVan] = useState(undefined)
 
     const params = useParams()
+    const location = useLocation()
+    console.dir(location);
 
     useEffect(()=>{
         fetch(`/api/vans/${params.id}`)
             .then(res => res.json())
             .then(data => setVan(data.vans))
+            .catch(error =>{
+                console.error(error);
+                setVan(null)
+            })
     }, [params.id])
 
-    const location = useLocation()
+    if(van === undefined) return <h1>Loading...</h1>
+    if (van === null) return <NotFound></NotFound>
 
     return(
 
