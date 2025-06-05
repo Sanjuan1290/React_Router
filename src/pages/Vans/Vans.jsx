@@ -1,10 +1,28 @@
 import { Link, useSearchParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Vans({vans}){
 
     const [filterTypes, setFilterTypes] = useState([])
-    console.log(filterTypes);
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    useEffect(() => {
+        setFilterTypes(searchParams.getAll('filter'));
+    }, []);
+
+    useEffect(()=> {
+        const params = new URLSearchParams(searchParams)
+        params.delete('filter')
+
+        filterTypes.forEach(key => {
+            params.append('filter', key)
+        })
+
+
+        setSearchParams(params)
+
+    }, [filterTypes, searchParams])
+
     const vanOptions =  vans.map((van) => {
                     return (filterTypes.includes(van.type) || filterTypes.length === 0) && <Link to={`/vans/${van.id}`} key={van.id}>
                                     <div className="van">
@@ -25,12 +43,11 @@ export default function Vans({vans}){
                             </Link>
                     })
 
-    function handleFilterClick(newType) {
-        setFilterTypes(prev =>
-            prev.includes(newType)
-                ? prev.filter(type => type !== newType)
-                : [...prev, newType]
-        );
+    function handleFilterClick(newKey) {
+
+        setFilterTypes(prevKey => (
+            prevKey.includes(newKey) ? prevKey.filter(key => key !== newKey) : [...prevKey, newKey]
+        ))
     }    
     function clearFilter(){
         setFilterTypes([])
