@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import { useParams, NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 export default function VansListDetails({van}){
 

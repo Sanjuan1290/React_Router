@@ -1,5 +1,4 @@
-import { useParams, useOutletContext } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useOutletContext } from 'react-router-dom'
 
 export default function Pricing(){
     const { van } = useOutletContext()
