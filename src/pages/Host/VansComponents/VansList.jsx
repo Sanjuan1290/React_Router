@@ -1,8 +1,11 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useData } from 'react-router-dom'
 
-export default function VansList({vans}){
+export default function VansList(){
 
-    const listedVans = vans.map(van => (
+    const data = useLoaderData()
+    console.log(data);
+
+    const listedVans = data.vans.map(van => (
                 <NavLink to={`${van.id}`} key={van.id}>
                     <div>
                         <img 
@@ -23,7 +26,9 @@ export default function VansList({vans}){
             <h1>Your listed vans</h1>
 
             <div className="listedVans-container">
-                {listedVans}
+                {
+                    (data.length !== 0 || data) && listedVans
+                }
             </div>
         </section>
     )

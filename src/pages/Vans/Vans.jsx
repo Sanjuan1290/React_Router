@@ -1,7 +1,8 @@
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams, useLoaderData } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
-export default function Vans({vans}){
+export default function Vans(){
+    const data = useLoaderData()
 
     const [filterTypes, setFilterTypes] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
@@ -18,13 +19,11 @@ export default function Vans({vans}){
             params.append('filter', key)
         })
 
-
         setSearchParams(params)
 
     }, [filterTypes, searchParams])
-    console.log(searchParams.toString());
 
-    const vanOptions =  vans.map((van) => {
+    const vanOptions =  data.vans.map((van) => {
                     return (filterTypes.includes(van.type) || filterTypes.length === 0) && 
                                     <Link to={`/vans/${van.id}`} key={van.id} state={{search: searchParams.toString()}} >
                                             <div className="van">
@@ -82,7 +81,7 @@ export default function Vans({vans}){
 
             <section className="vans-container">
                 { 
-                    vans.length !== 0 && vanOptions
+                    data.vans.length !== 0 && vanOptions
                 }
             </section>
 

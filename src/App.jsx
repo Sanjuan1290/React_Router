@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { RouterProvider, 
             createBrowserRouter, 
             createRoutesFromElements, 
@@ -25,29 +24,27 @@ import Details from './pages/Host/VansComponents/VansListDetailsComponents/Detai
 import Photos from './pages/Host/VansComponents/VansListDetailsComponents/Photos'
 import Pricing from './pages/Host/VansComponents/VansListDetailsComponents/Pricing'
 
+import { getVans } from "./api"
 import './server'
 
 export default function App(){
-    const [vans, setVans] = useState([])
-
-    useEffect(()=> {
-        fetch('/api/vans').
-        then(response => response.json()).
-        then(data => setVans(data.vans))
-    }, [])
+    
+    function vansLoader(){
+        return getVans()
+    }
 
     const router = createBrowserRouter(createRoutesFromElements(
          <Route path='/' element={ <Layout /> }>
             <Route index element={<Home />}/>
             <Route path='about' element={<About />} />
-            <Route path='vans' element={vans.length !== 0 && <Vans vans={vans} />} />
-            <Route path='vans/:id' element={<VanDetail vans={vans} />}/>
+            <Route path='vans' element={<Vans />} errorElement={<h2>Couldn’t load vans.</h2>}  loader={vansLoader} />
+            <Route path='vans/:id' element={<VanDetail />}/>
 
             <Route path="host" element={<HostLayout />} >
                 <Route index element={<Dashboard />}/>
                 <Route path='income' element={<Income />} />
 
-                <Route path='vans' element={<VansList vans={vans}/>} />
+                <Route path='vans' element={<VansList />} errorElement={<h2>Couldn’t load vans.</h2>} loader={vansLoader} />
 
                 <Route path='vans/:id' element={<VansListLayout />}> 
                     <Route index element={<Details />} />
@@ -64,7 +61,7 @@ export default function App(){
 
     return(
 
-        <RouterProvider router={router} />
+        <RouterProvider router={router}/>
 
     )
 }
