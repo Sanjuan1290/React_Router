@@ -1,4 +1,4 @@
-import { NavLink, useData } from 'react-router-dom'
+import { NavLink, useLoaderData } from 'react-router-dom'
 
 export default function VansList(){
 

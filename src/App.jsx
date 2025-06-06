@@ -7,6 +7,7 @@ import Layout from './components/Layout'
 import HostLayout from './components/HostLayout'
 import VansListLayout from './components/VansListLayout'
 import NotFound from "./components/NotFound"
+import Error from './components/Error'
 
 import Vans from './pages/Vans/Vans'
 import VanDetail from './pages/Vans/VanDetail'
@@ -37,14 +38,14 @@ export default function App(){
          <Route path='/' element={ <Layout /> }>
             <Route index element={<Home />}/>
             <Route path='about' element={<About />} />
-            <Route path='vans' element={<Vans />} errorElement={<h2>Couldn’t load vans.</h2>}  loader={vansLoader} />
+            <Route path='vans' element={<Vans />} errorElement={<Error />}  loader={vansLoader} />
             <Route path='vans/:id' element={<VanDetail />}/>
 
             <Route path="host" element={<HostLayout />} >
                 <Route index element={<Dashboard />}/>
                 <Route path='income' element={<Income />} />
 
-                <Route path='vans' element={<VansList />} errorElement={<h2>Couldn’t load vans.</h2>} loader={vansLoader} />
+                <Route path='vans' element={<VansList />} errorElement={<Error />} loader={vansLoader} />
 
                 <Route path='vans/:id' element={<VansListLayout />}> 
                     <Route index element={<Details />} />
