@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
-import { BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import { RouterProvider, 
+            createBrowserRouter, 
+            createRoutesFromElements, 
+            Route } from 'react-router-dom'
 
 import Layout from './components/Layout'
 import HostLayout from './components/HostLayout'
@@ -33,41 +36,35 @@ export default function App(){
         then(data => setVans(data.vans))
     }, [])
 
+    const router = createBrowserRouter(createRoutesFromElements(
+         <Route path='/' element={ <Layout /> }>
+            <Route index element={<Home />}/>
+            <Route path='about' element={<About />} />
+            <Route path='vans' element={vans.length !== 0 && <Vans vans={vans} />} />
+            <Route path='vans/:id' element={<VanDetail vans={vans} />}/>
+
+            <Route path="host" element={<HostLayout />} >
+                <Route index element={<Dashboard />}/>
+                <Route path='income' element={<Income />} />
+
+                <Route path='vans' element={<VansList vans={vans}/>} />
+
+                <Route path='vans/:id' element={<VansListLayout />}> 
+                    <Route index element={<Details />} />
+                    <Route path='photos' element={<Photos />} />
+                    <Route path='pricing' element={<Pricing />} />
+                </Route>
+
+                <Route path='reviews' element={<Reviews />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />}/>
+        </Route>
+    ))
+
     return(
 
-        <BrowserRouter>
+        <RouterProvider router={router} />
 
-            <Routes>
-
-                <Route path='/' element={ <Layout /> }>
-
-                    <Route index element={<Home />}/>
-                    <Route path='about' element={<About />} />
-                    <Route path='vans' element={vans.length !== 0 && <Vans vans={vans} />} />
-                    <Route path='vans/:id' element={<VanDetail vans={vans} />}/>
-
-                    <Route path="host" element={<HostLayout />} >
-                        <Route index element={<Dashboard />}/>
-                        <Route path='income' element={<Income />} />
-
-                        <Route path='vans' element={<VansList vans={vans}/>} />
-
-                        <Route path='vans/:id' element={<VansListLayout />}> 
-                            <Route index element={<Details />} />
-                            <Route path='photos' element={<Photos />} />
-                            <Route path='pricing' element={<Pricing />} />
-                        </Route>
-
-                        <Route path='reviews' element={<Reviews />} />
-                    </Route>
-
-                    <Route path="*" element={<NotFound />}/>
-                </Route>
-                
-
-            </Routes>
-
-
-        </BrowserRouter>
     )
 }
