@@ -1,10 +1,15 @@
 import { NavLink, useLoaderData } from 'react-router-dom'
+import { getVans } from '../../../api'
+
+export function loader({params}){
+    return getVans(params.id)
+}
 
 export default function VansList(){
 
     const data = useLoaderData()
 
-    const listedVans = data.vans.map(van => (
+    const listedVans = data.map(van => (
                 <NavLink to={`${van.id}`} key={van.id}>
                     <div>
                         <img 

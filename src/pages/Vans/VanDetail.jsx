@@ -1,24 +1,16 @@
-import { useEffect, useState } from 'react'
-import { useParams, Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useLoaderData } from "react-router-dom"
 import '../../server'
 import NotFound from '../../components/NotFound'
+import { getVans } from '../../api'
+
+export function loader({params}){
+    return getVans(params.id)
+}
 
 export default function VanDetail(){
 
-    const [van, setVan] = useState(undefined)
-
-    const params = useParams()
     const location = useLocation()
-
-    useEffect(()=>{
-        fetch(`/api/vans/${params.id}`)
-            .then(res => res.json())
-            .then(data => setVan(data.vans))
-            .catch(error =>{
-                console.error(error);
-                setVan(null)
-            })
-    }, [params.id])
+    const van = useLoaderData()
 
     if(van === undefined) return <h1>Loading...</h1>
     if (van === null) return <NotFound></NotFound>

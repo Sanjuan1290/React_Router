@@ -1,21 +1,15 @@
-import { Outlet, NavLink, useParams } from "react-router-dom"
+import { Outlet, NavLink, useLoaderData } from "react-router-dom"
 import VansListDetails from "../pages/Host/VansComponents/VansListDetails"
-import { useEffect, useState } from "react"
 import NotFound from "./NotFound"
+import { getVans } from "../api"
+
+export function loader({params}){
+    return getVans(params.id)
+}
 
 export default function VansListLayout(){
-    const { id } = useParams()
-    const [van, setVan] = useState(undefined)
 
-    useEffect(() => {
-        fetch(`/api/vans/${id}`)
-            .then(res => res.json())
-            .then(data => setVan(data.vans))
-            .catch(error => {
-                console.error(error);
-                setVan(null)
-            })
-    }, [id])
+    const van = useLoaderData()
 
     if (van === undefined) return <h2>Loading...</h2>;
     if (van === null) return <NotFound />;
