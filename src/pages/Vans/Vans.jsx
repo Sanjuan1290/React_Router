@@ -86,7 +86,7 @@ export default function Vans(){
 
             <section className="vans-container">
                 { 
-                    vans.length !== 0 && vanOptions
+                    vanOptions
                 }
             </section>
 

@@ -11,13 +11,10 @@ export default function VansListLayout(){
 
     const van = useLoaderData()
 
-    if (van === undefined) return <h2>Loading...</h2>;
-    if (van === null) return <NotFound />;
-    
     return(
         <>
         {
-            van && van !== null && <section className="vansListDetails_Layout">
+            <section className="vansListDetails_Layout">
                 <NavLink to='..' relative="path"><span>Back to all vans</span></NavLink>
 
                 <div>
