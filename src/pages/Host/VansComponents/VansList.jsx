@@ -3,7 +3,6 @@ import { NavLink, useLoaderData } from 'react-router-dom'
 export default function VansList(){
 
     const data = useLoaderData()
-    console.log(data);
 
     const listedVans = data.vans.map(van => (
                 <NavLink to={`${van.id}`} key={van.id}>
