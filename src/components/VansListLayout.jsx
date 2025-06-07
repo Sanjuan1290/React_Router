@@ -1,6 +1,5 @@
 import { Outlet, NavLink, useLoaderData } from "react-router-dom"
 import VansListDetails from "../pages/Host/VansComponents/VansListDetails"
-import NotFound from "./NotFound"
 import { getVans } from "../api"
 
 export function loader({params}){
