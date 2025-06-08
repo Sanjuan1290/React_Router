@@ -398,3 +398,31 @@ footer > p{
 .notFound a > button:hover{
     opacity: .9;
 }
+
+
+form.login{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+}
+form.login h1{
+    margin-bottom: 20px;
+}
+form.login > input{
+    width: calc(100% - 24px);
+    padding: 12px;
+    border: 1px solid rgba(128, 128, 128, 0.368);
+    border-radius: 5px;
+    background-color: rgb(227,237,253);
+    font-weight: 500;
+}
+form.login > button {
+    background-color: rgb(244, 119, 42);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    margin-top: 30px;
+    border-radius: 5px;
+}
