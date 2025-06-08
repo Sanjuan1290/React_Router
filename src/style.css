@@ -407,6 +407,9 @@ form.login{
     align-items: center;
 }
 form.login h1{
+    margin-bottom: 10px;
+}
+form.login h2{
     margin-bottom: 20px;
 }
 form.login > input{
