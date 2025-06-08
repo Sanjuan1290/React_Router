@@ -411,6 +411,7 @@ form.login h1{
 }
 form.login h2{
     margin-bottom: 20px;
+    color: rgb(209, 5, 5);
 }
 form.login > input{
     width: calc(100% - 24px);

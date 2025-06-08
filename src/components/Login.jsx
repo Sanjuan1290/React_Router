@@ -23,10 +23,10 @@ export default function Login(){
         <>
             <form onSubmit={handleSubmitForm} className="login">
                 <h1>Sign in to your account</h1>
-                <h2>{message}</h2>
+                {message && <h2>{message}</h2>}
 
-                <input name="email" type="email" placeholder="example@gmail.com" defaultValue="robertSanJuan@gmail.com"/>
-                <input name="password" type="password" placeholder="password" defaultValue="1234567890"/>
+                <input name="email" type="email" placeholder="example@gmail.com" autoComplete="email" defaultValue="robertSanJuan@gmail.com"/>
+                <input name="password" type="password" placeholder="password" autoComplete="current-password" defaultValue="1234567890"/>
 
                 <button>Log in</button>
             </form>
