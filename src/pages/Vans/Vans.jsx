@@ -1,8 +1,10 @@
 import { Link, useSearchParams, useLoaderData } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {getVans} from '../../api'
+import { requireAuth } from '../../util'
 
-export function loader({ params }){
+export async function loader({ params }){
+    await requireAuth()
     return getVans(params.id)
 }
 

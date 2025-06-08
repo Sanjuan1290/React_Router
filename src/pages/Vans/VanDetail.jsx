@@ -2,8 +2,10 @@ import { Link, useLocation, useLoaderData } from "react-router-dom"
 import '../../server'
 import NotFound from '../../components/NotFound'
 import { getVans } from '../../api'
+import { requireAuth } from "../../util"
 
-export function loader({params}){
+export async function loader({params}){
+    await requireAuth()
     return getVans(params.id)
 }
 
