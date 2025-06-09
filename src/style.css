@@ -405,6 +405,9 @@ footer > p{
     flex-direction: column;
     padding: 20px;
     align-items: center;
+    width: 80%;
+    max-width: 600px;
+    margin: 10px auto;
 }
 .login h1{
     margin-bottom: 10px;
@@ -413,6 +416,9 @@ footer > p{
 .login h3{
     margin-bottom: 20px;
     color: rgb(209, 5, 5);
+}
+.login > form {
+    width: 100%;
 }
 .login > form > input{
     width: calc(100% - 24px);

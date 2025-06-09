@@ -22,13 +22,9 @@ export default function Login() {
         console.log('click');
         setState('submitting')
         loginUser(loginFormData)
-            .then(data => {
-                console.log(data) 
-                setState('idle')
-            })
-            .catch(err => {
-                setError(err)
-            })
+            .then(data => { console.log(data) })
+            .catch(err => { setError(err) })
+            .finally(()=>{ setState('idle') })
     }
 
     function handleChange(e) {
@@ -41,12 +37,13 @@ export default function Login() {
 
     return (
         <div className="login">
+            <h1>Sign in to your account</h1>
+            
             {
-                error !== null ? 
-                    <h1>{error.message}</h1> :
-                    <h1>Sign in to your account</h1>
+                error !== null ?
+                <h3>{error.message}</h3> :
+                message && <h3 >{message}</h3>
             }
-            {message && <h3 >{message}</h3>}
             <form onSubmit={handleSubmit}>
                 <input
                     name="email"
@@ -64,7 +61,9 @@ export default function Login() {
                     autoComplete="current-password"
                     value={loginFormData.password}
                 />
-                <button disabled={state === 'submitting'}>Log in</button>
+                <button disabled={state === 'submitting'}>{
+                        state === 'submitting' ? 'Logging in' : 'Log in'
+                    }</button>
             </form>
         </div>
     )
