@@ -400,20 +400,20 @@ footer > p{
 }
 
 
-form.login{
+.login{
     display: flex;
     flex-direction: column;
     padding: 20px;
     align-items: center;
 }
-form.login h1{
+.login h1{
     margin-bottom: 10px;
 }
-form.login h2{
+.login h3{
     margin-bottom: 20px;
     color: rgb(209, 5, 5);
 }
-form.login > input{
+.login > form > input{
     width: calc(100% - 24px);
     padding: 12px;
     border: 1px solid rgba(128, 128, 128, 0.368);
@@ -421,7 +421,7 @@ form.login > input{
     background-color: rgb(227,237,253);
     font-weight: 500;
 }
-form.login > button {
+.login > form > button {
     background-color: rgb(244, 119, 42);
     color: white;
     border: none;

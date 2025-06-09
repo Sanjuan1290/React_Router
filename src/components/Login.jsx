@@ -1,35 +1,52 @@
+import React from "react"
 import { useLoaderData } from "react-router-dom"
+import { loginUser } from "../api"
 
-export function loader(obj){
-    const message = new URL(obj.request.url).searchParams.get('message')
-    return message
+export function loader({ request }) {
+    return new URL(request.url).searchParams.get("message")
 }
 
-export default function Login(){
-
+export default function Login() {
+    const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
     const message = useLoaderData()
 
-    function handleSubmitForm(event){
-        event.preventDefault()
-
-        const form = event.target
-        const email = form.email.value
-        const password = form.password.value
-        
-        console.log('Email: ' + email);
-        console.log("Password: " + password);
+    function handleSubmit(e) {
+        e.preventDefault()
+        loginUser(loginFormData)
+            .then(data => console.log(data))
     }
-    return(
-        <>
-            <form onSubmit={handleSubmitForm} className="login">
-                <h1>Sign in to your account</h1>
-                {message && <h2>{message}</h2>}
 
-                <input name="email" type="email" placeholder="example@gmail.com" autoComplete="email" defaultValue="robertSanJuan@gmail.com"/>
-                <input name="password" type="password" placeholder="password" autoComplete="current-password" defaultValue="1234567890"/>
+    function handleChange(e) {
+        const { name, value } = e.target
+        setLoginFormData(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
 
+    return (
+        <div className="login">
+            <h1>Sign in to your account</h1>
+            {message && <h3 >{message}</h3>}
+            <form onSubmit={handleSubmit}>
+                <input
+                    name="email"
+                    onChange={handleChange}
+                    type="email"
+                    placeholder="Email address"
+                    autoComplete="email"
+                    value={loginFormData.email}
+                />
+                <input
+                    name="password"
+                    onChange={handleChange}
+                    type="password"
+                    placeholder="Password"
+                    autoComplete="current-password"
+                    value={loginFormData.password}
+                />
                 <button>Log in</button>
             </form>
-        </>
+        </div>
     )
 }
