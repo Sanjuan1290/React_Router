@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useLoaderData } from "react-router-dom"
 import { loginUser } from "../api"
 
@@ -10,10 +10,25 @@ export default function Login() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
     const message = useLoaderData()
 
+    const [state, setState] = React.useState('idle');
+    const [error, setError] = React.useState(null)
+
+    useEffect(()=>{
+        if(state === 'submitting') setError(null)
+    }, [state])
+
     function handleSubmit(e) {
         e.preventDefault()
+        console.log('click');
+        setState('submitting')
         loginUser(loginFormData)
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data) 
+                setState('idle')
+            })
+            .catch(err => {
+                setError(err)
+            })
     }
 
     function handleChange(e) {
@@ -26,7 +41,11 @@ export default function Login() {
 
     return (
         <div className="login">
-            <h1>Sign in to your account</h1>
+            {
+                error !== null ? 
+                    <h1>{error.message}</h1> :
+                    <h1>Sign in to your account</h1>
+            }
             {message && <h3 >{message}</h3>}
             <form onSubmit={handleSubmit}>
                 <input
@@ -45,7 +64,7 @@ export default function Login() {
                     autoComplete="current-password"
                     value={loginFormData.password}
                 />
-                <button>Log in</button>
+                <button disabled={state === 'submitting'}>Log in</button>
             </form>
         </div>
     )

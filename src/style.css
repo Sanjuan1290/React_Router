@@ -408,6 +408,7 @@ footer > p{
 }
 .login h1{
     margin-bottom: 10px;
+    text-align: center;
 }
 .login h3{
     margin-bottom: 20px;
@@ -429,4 +430,5 @@ footer > p{
     padding: 12px;
     margin-top: 30px;
     border-radius: 5px;
+    cursor: pointer;
 }
