@@ -1,9 +1,21 @@
 import React, { useEffect } from "react"
-import { useLoaderData, useNavigate } from "react-router-dom"
+import { useLoaderData, useNavigate, Form } from "react-router-dom"
 import { loginUser } from "../api"
 
 export function loader({ request }) {
     return new URL(request.url).searchParams.get("message")
+}
+
+export async function action(obj){
+    console.log("Action Function");
+
+    const formData = await obj.request.formData()
+    const email = formData.get('email')
+    const password = formData.get('password')
+
+    console.log(email);
+    console.log(password);
+    return null
 }
 
 export default function Login() {
@@ -48,7 +60,7 @@ export default function Login() {
                 <h3>{error.message}</h3> :
                 message && <h3 >{message}</h3>
             }
-            <form onSubmit={handleSubmit}>
+            <Form method="post">
                 <input
                     name="email"
                     onChange={handleChange}
@@ -68,7 +80,7 @@ export default function Login() {
                 <button disabled={state === 'submitting'}>{
                         state === 'submitting' ? 'Logging in' : 'Log in'
                     }</button>
-            </form>
+            </Form>
         </div>
     )
 }

@@ -8,7 +8,7 @@ import HostLayout from './components/HostLayout'
 import VansListLayout, {loader as vansListLayoutLoader} from './components/VansListLayout'
 import NotFound from "./components/NotFound"
 import Error from './components/Error'
-import Login, { loader as loginLoader} from './components/Login'
+import Login, { loader as loginLoader, action as loginAction} from './components/Login'
 
 import Vans, {loader as vansLoader} from './pages/Vans/Vans'
 import VanDetail, {loader as vansDetailLoader} from './pages/Vans/VanDetail'
@@ -35,7 +35,7 @@ export default function App(){
     const router = createBrowserRouter(createRoutesFromElements(
          <Route path='/' element={ <Layout /> } errorElement={<Error />}>
             <Route index element={<Home />}/>
-            <Route path='login' element={<Login />} loader={loginLoader}/>
+            <Route path='login' element={<Login />} loader={loginLoader} action={loginAction}/>
             <Route path='about' element={<About />} />
             <Route path='vans' 
                 element={<Vans />} 
