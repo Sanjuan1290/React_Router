@@ -1,8 +1,13 @@
-import { NavLink} from 'react-router-dom'
+import { NavLink, useNavigate} from 'react-router-dom'
 
 
-export default function Header(props){
-
+export default function Header(){
+    const navigate = useNavigate()
+    
+    function logout(){
+        localStorage.setItem('isLoggedIn', false)
+        navigate('/login')
+    }
     return(
         <>
             <header>
@@ -19,6 +24,7 @@ export default function Header(props){
                         <li><NavLink
                             to="/vans" 
                             className={obj => obj.isActive ? 'activeNav' : null}>Vans</NavLink></li>
+                        <li><button onClick={logout}>logout</button></li>
                     </ul>
                 </nav>
 

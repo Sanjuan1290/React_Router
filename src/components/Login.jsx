@@ -1,29 +1,37 @@
 import React, { useEffect } from "react"
-import { useLoaderData, useNavigate, Form } from "react-router-dom"
+import { useLoaderData, useNavigate, Form, useActionData, redirect } from "react-router-dom"
 import { loginUser } from "../api"
 
 export function loader({ request }) {
     return new URL(request.url).searchParams.get("message")
 }
 
-export async function action(obj){
+export async function action({ request }) {
     console.log("Action Function");
 
-    const formData = await obj.request.formData()
-    const email = formData.get('email')
-    const password = formData.get('password')
+    const formData = await request.formData();
+    const email = formData.get('email');
+    const password = formData.get('password');
 
-    console.log(email);
-    console.log(password);
-    return null
+    try {
+        const data = await loginUser({ email, password });
+        localStorage.setItem('isLoggedIn', JSON.stringify(true));
+        console.log("redirecting na");
+        const redirectResponse = redirect('/host', { replace: true });
+        redirectResponse.body= true
+        return redirectResponse
+
+    } catch (err) {
+        console.log("error Bossing", err);
+        return null;
+    }
 }
 
-export default function Login() {
-    const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
-    const message = useLoaderData()
 
+export default function Login() {
     const [state, setState] = React.useState('idle');
     const [error, setError] = React.useState(null)
+    const message = useLoaderData()
     const navigate = useNavigate()
 
     useEffect(()=>{
@@ -43,14 +51,6 @@ export default function Login() {
             .finally(()=>{ setState('idle') })
     }
 
-    function handleChange(e) {
-        const { name, value } = e.target
-        setLoginFormData(prev => ({
-            ...prev,
-            [name]: value
-        }))
-    }
-
     return (
         <div className="login">
             <h1>Sign in to your account</h1>
@@ -60,22 +60,18 @@ export default function Login() {
                 <h3>{error.message}</h3> :
                 message && <h3 >{message}</h3>
             }
-            <Form method="post">
+            <Form method="POST">
                 <input
                     name="email"
-                    onChange={handleChange}
                     type="email"
                     placeholder="Email address"
                     autoComplete="email"
-                    value={loginFormData.email}
                 />
                 <input
                     name="password"
-                    onChange={handleChange}
                     type="password"
                     placeholder="Password"
                     autoComplete="current-password"
-                    value={loginFormData.password}
                 />
                 <button disabled={state === 'submitting'}>{
                         state === 'submitting' ? 'Logging in' : 'Log in'
