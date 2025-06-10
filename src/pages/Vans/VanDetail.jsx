@@ -4,8 +4,8 @@ import NotFound from '../../components/NotFound'
 import { getVans } from '../../api'
 import { requireAuth } from "../../util"
 
-export async function loader({params}){
-    await requireAuth()
+export async function loader({params, request}){
+    await requireAuth(request)
     return getVans(params.id)
 }
 

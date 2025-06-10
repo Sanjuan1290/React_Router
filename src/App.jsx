@@ -52,11 +52,11 @@ export default function App(){
                 <Route 
                     index 
                     element={<Dashboard />} 
-                    loader={async () => requireAuth()}
+                    loader={async ({request}) => requireAuth(request)}
                 />
                 <Route path='income' 
                     element={<Income />} 
-                    loader={async () => requireAuth()}
+                    loader={async ({request}) => requireAuth(request)}
                 />
                 <Route path='vans' 
                     element={<VansList />} 
@@ -76,7 +76,7 @@ export default function App(){
                 <Route 
                     path='reviews' 
                     element={<Reviews />} 
-                    loader={async () => requireAuth()}
+                    loader={async ({request}) => requireAuth(request)}
                 />
             </Route>
 

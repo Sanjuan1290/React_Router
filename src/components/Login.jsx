@@ -1,5 +1,4 @@
-import React, { useEffect } from "react"
-import { useLoaderData, useNavigate, Form, useActionData, redirect, useNavigation } from "react-router-dom"
+import { useLoaderData, Form, useActionData, redirect, useNavigation } from "react-router-dom"
 import { loginUser } from "../api"
 
 export function loader({ request }) {
@@ -7,7 +6,8 @@ export function loader({ request }) {
 }
 
 export async function action({ request }) {
-    console.log("Action Function");
+
+    const searchParams = new URL(request.url).searchParams.get('redirectTo')
 
     const formData = await request.formData();
     const email = formData.get('email');
@@ -17,7 +17,7 @@ export async function action({ request }) {
         const data = await loginUser({ email, password });
         localStorage.setItem('isLoggedIn', JSON.stringify(true));
 
-        const redirectResponse = redirect('/host');
+        const redirectResponse = redirect(searchParams);
         redirectResponse.body= true
         return redirectResponse
 

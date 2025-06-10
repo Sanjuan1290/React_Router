@@ -3,8 +3,8 @@ import VansListDetails from "../pages/Host/VansComponents/VansListDetails"
 import { getVans } from "../api"
 import { requireAuth } from "../util"
 
-export async function loader({params}){
-    await requireAuth()
+export async function loader({params, request}){
+    await requireAuth(request)
     return getVans(params.id)
 }
 
