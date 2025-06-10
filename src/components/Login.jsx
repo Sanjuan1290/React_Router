@@ -17,7 +17,7 @@ export async function action({ request }) {
         const data = await loginUser({ email, password });
         localStorage.setItem('isLoggedIn', JSON.stringify(true));
 
-        const redirectResponse = redirect(searchParams);
+        const redirectResponse = redirect(searchParams !== null ? searchParams : '/host');
         redirectResponse.body= true
         return redirectResponse
 
