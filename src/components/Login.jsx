@@ -16,8 +16,8 @@ export async function action({ request }) {
     try {
         const data = await loginUser({ email, password });
         localStorage.setItem('isLoggedIn', JSON.stringify(true));
-        console.log("redirecting na");
-        const redirectResponse = redirect('/host', { replace: true });
+
+        const redirectResponse = redirect('/host');
         redirectResponse.body= true
         return redirectResponse
 
@@ -60,7 +60,7 @@ export default function Login() {
                 <h3>{error.message}</h3> :
                 message && <h3 >{message}</h3>
             }
-            <Form method="POST">
+            <Form method="POST" replace={true}>
                 <input
                     name="email"
                     type="email"
