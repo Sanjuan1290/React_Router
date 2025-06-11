@@ -3,9 +3,9 @@ import { Suspense } from 'react'
 import { getHostVans } from '../../../api'
 import { requireAuth } from '../../../util'
 
-export async function loader({params, request}){
+export async function loader({request}){
     await requireAuth(request)
-    return defer({vans: getHostVans(params.id)})
+    return defer({vans: getHostVans()})
 }
 
 export default function VansList(){
