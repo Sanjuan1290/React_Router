@@ -438,3 +438,68 @@ footer > p{
     border-radius: 5px;
     cursor: pointer;
 }
+
+
+.host-reviews{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 20px;
+    padding: 20px;
+    width: 80%;
+    margin: auto;
+}
+.top-text{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.graph{
+    width: 90%;
+    min-width: 400px;
+    max-width: 700px;
+}
+.review-star, .star{
+    color: orange;
+}
+
+
+.host-income{
+    padding: 20px;
+    width: 80%;
+    margin: auto;
+}
+.info-header{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+
+.dashboard-section{
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+.host-dashboard-vans{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.host-dashboard-vans .top{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+.host-dashboard-vans .top a{
+    text-decoration: underline;
+}
+.host-van-single img{
+    width: 80%;
+    max-width: 400px;
+    min-width: 200px;
+}

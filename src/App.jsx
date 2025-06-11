@@ -16,7 +16,7 @@ import VanDetail, {loader as vansDetailLoader} from './pages/Vans/VanDetail'
 import Home from './pages/Home'
 import About from './pages/About'
 
-import Dashboard from "./pages/Host/Dashboard"
+import Dashboard, {loader as dashboardLoader} from "./pages/Host/Dashboard"
 import Income from './pages/Host/Income'
 import Reviews from './pages/Host/Reviews'
 
@@ -46,13 +46,15 @@ export default function App(){
                 path='vans/:id' 
                 element={<VanDetail />} 
                 loader={vansDetailLoader}
+                errorElement={<Error />}  
             />
 
             <Route path="host" element={<HostLayout />} >
                 <Route 
                     index 
                     element={<Dashboard />} 
-                    loader={async ({request}) => requireAuth(request)}
+                    loader={dashboardLoader}
+                    errorElement={<Error />}  
                 />
                 <Route path='income' 
                     element={<Income />} 
@@ -66,7 +68,9 @@ export default function App(){
 
                 <Route path='vans/:id' 
                         element={<VansListLayout />} 
-                        loader={vansListLayoutLoader}> 
+                        loader={vansListLayoutLoader} 
+                        errorElement={<Error />}  > 
+                        
 
                     <Route index element={<Details />} />
                     <Route path='photos' element={<Photos />} />
