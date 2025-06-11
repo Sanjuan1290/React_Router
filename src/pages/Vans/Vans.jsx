@@ -1,15 +1,15 @@
-import { Link, useSearchParams, useLoaderData } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { Link, useSearchParams, useLoaderData, defer, Await } from 'react-router-dom'
+import { useEffect, useState, Suspense } from 'react'
 import {getVans} from '../../api'
 import { requireAuth } from '../../util'
 
 export async function loader({ params, request }){
     await requireAuth(request)
-    return getVans(params.id)
+    return defer({vans: getVans(params.id)})
 }
 
 export default function Vans(){
-    const vans = useLoaderData()
+    const { vans } = useLoaderData()
 
     const [filterTypes, setFilterTypes] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
@@ -30,26 +30,28 @@ export default function Vans(){
 
     }, [filterTypes, searchParams])
 
-    const vanOptions =  vans.map((van) => {
-                    return (filterTypes.includes(van.type) || filterTypes.length === 0) && 
-                                    <Link to={`/vans/${van.id}`} key={van.id} state={{search: searchParams.toString()}} >
-                                            <div className="van">
-                                                <img src={van.imageUrl} alt={`${van.name} image`} />
+    function renderVanCards(vans){ 
+            return vans.map((van) => {
+                return (filterTypes.includes(van.type) || filterTypes.length === 0) && 
+                                <Link to={`/vans/${van.id}`} key={van.id} state={{search: searchParams.toString()}} >
+                                        <div className="van">
+                                            <img src={van.imageUrl} alt={`${van.name} image`} />
 
-                                                <div className="name_and_rent">
-                                                    <h3>{van.name}</h3>
-                                                    <h3>${van.price} <p>/day</p></h3>
-                                                </div>
-
-                                                <button className={
-                                                        van.type === "simple" ? 'simple' :
-                                                        van.type === "rugged" ? 'rugged' :
-                                                        van.type === "luxury" ? 'luxury' : null
-                                                    }
-                                                >{van.type}</button>
+                                            <div className="name_and_rent">
+                                                <h3>{van.name}</h3>
+                                                <h3>${van.price} <p>/day</p></h3>
                                             </div>
-                                    </Link>
-                    })
+
+                                            <button className={
+                                                    van.type === "simple" ? 'simple' :
+                                                    van.type === "rugged" ? 'rugged' :
+                                                    van.type === "luxury" ? 'luxury' : null
+                                                }
+                                            >{van.type}</button>
+                                        </div>
+                                </Link>
+                })
+        }
 
     function handleFilterClick(newKey) {
 
@@ -87,9 +89,11 @@ export default function Vans(){
             </section> 
 
             <section className="vans-container">
-                { 
-                    vanOptions
-                }
+                <Suspense fallback={<h2>Loading vans...</h2>}>
+                    <Await resolve={vans}>
+                        {(data)=> renderVanCards(data)}
+                    </Await>
+                </Suspense>
             </section>
 
         </section>

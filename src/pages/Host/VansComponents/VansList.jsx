@@ -1,30 +1,33 @@
-import { NavLink, useLoaderData } from 'react-router-dom'
+import { NavLink, useLoaderData, defer, Await } from 'react-router-dom'
+import { Suspense } from 'react'
 import { getHostVans } from '../../../api'
 import { requireAuth } from '../../../util'
 
 export async function loader({params, request}){
     await requireAuth(request)
-    return getHostVans(params.id)
+    return defer({vans: getHostVans(params.id)})
 }
 
 export default function VansList(){
 
-    const data = useLoaderData()
+    const { vans } = useLoaderData()
 
-    const listedVans = data.map(van => (
-                <NavLink to={`${van.id}`} key={van.id}>
-                    <div>
-                        <img 
-                            src={`${van.imageUrl}`} 
-                            alt={`${van.name}`} />
-                        
+    function listedVans(vans) { 
+        return vans.map(van => (
+                    <NavLink to={`${van.id}`} key={van.id}>
                         <div>
-                            <h2>{`${van.name}`}</h2>
-                            <p>${`${van.price}`}/day</p>
+                            <img 
+                                src={`${van.imageUrl}`} 
+                                alt={`${van.name}`} />
+                            
+                            <div>
+                                <h2>{`${van.name}`}</h2>
+                                <p>${`${van.price}`}/day</p>
+                            </div>
                         </div>
-                    </div>
-                </NavLink>
-    ))
+                    </NavLink>
+        ))
+    }
 
 
     return(
@@ -32,9 +35,11 @@ export default function VansList(){
             <h1>Your listed vans</h1>
 
             <div className="listedVans-container">
-                {
-                    (data.length !== 0 || data) && listedVans
-                }
+                <Suspense fallback={<h2>Vans Loading...</h2>}>
+                    <Await resolve={vans}>
+                        {(data) => listedVans(data)}
+                    </Await>
+                </Suspense> 
             </div>
         </section>
     )
